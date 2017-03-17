@@ -1,0 +1,129 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<!-- Latest compiled and minified JavaScript 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link href="http://seiyria.com/bootstrap-slider/css/bootstrap-slider.css" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.0/css/bootstrap-slider.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.0/css/bootstrap-slider.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.0/bootstrap-slider.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.0/bootstrap-slider.min.js" ></script>
+
+<?php
+echo $this->Html->css('game-menu', null, array('media' => 'screen')) . "\n";
+echo $this->Html->css('home', null, array('media' => 'screen')) . "\n";
+echo $this->Html->css('game-page-title', null, array('media' => 'screen')) . "\n";
+echo $this->Html->css('atividades', null, array('media' => 'screen')) . "\n";
+echo $this->Html->css('Missao/missao', null, array('media' => 'screen')) . "\n";
+echo $this->Html->css('Programa/programa', null, array('media' => 'screen')) . "\n";
+echo $this->Html->css('itensOfForm', null, array('media' => 'screen')) . "\n";
+
+echo $this->fetch('css');
+
+echo $this->Html->script('backButtonjs') . "\n";
+echo $this->fetch('script');
+?>
+<script>
+    var contador = 0;
+    $(function() {
+
+<?php
+foreach ($objetos as $objeto) {
+    if ($objeto['objetos']['escala'] == 1) {
+        ?>
+                console.log("CONTADOR: " + contador);
+                $('#ex' + contador).slider({
+                    formatter: function(value) {
+                        console.log(value);
+                        $("#scaleValue" + contador).html(value);
+                        return 'Current value: ' + value;
+                    }
+                });
+                contador++;
+        <?php
+    }
+}
+?>
+
+        $(".sliderClass").slider({
+            formatter: function(value) {
+                console.log(value);
+                var id = $(this).attr("id");
+                $("#span" + id).html(value);
+                console.log('MUDOU SLIDE - MUDOU - ID: ' + id + ' - ');
+                return 'Current value: ' + value;
+            }
+        });
+
+    });
+</script>
+
+
+<?php echo $this->Element('header_menu'); ?>
+
+<div class="jumbotron text-center game-page-title">
+    <h4 class="pull-left" id="page-back-btn"><span class="glyphicon glyphicon-menu-left"> </span></h4>  <h4>Programas</h4>      
+</div> 
+<div class="jumbotron text-center programa-page-title">
+    <h6>Treinamento Feedback</h6>      
+</div> 
+<div class="page-header programa-page-header">
+    <h4>Rodada nº: <small><span class="badge"><?php echo $contadorRodada; ?></span></small></h4>
+</div>
+<div class="container text-center">
+    <br/>
+    <?php
+    $contador = 0;
+    if (!empty($objetos)) {
+        ?>
+
+        <form method="post" action="../Programa/realizaPrograma">
+            <?php foreach ($objetos as $objeto) {
+                ?>
+                <div class="jumbotron objetos-desafio text-left">
+                    <?php if ($objeto['objetos']['escala'] == 1) { ?>
+                        <div>
+
+                            <span><strong><?php echo $objeto['objetos']['descricao']; ?></strong></span><br/>
+                            <input class="sliderClass" name="<?php echo $objeto['objetos']['id']; ?>" id="ex<?php echo $contador; ?>" data-slider-id='ex<?php echo $contador; ?>Slider' type="text" data-slider-min="<?php echo $objeto['objetos']['escala_valor_inicial']; ?>" data-slider-max="<?php echo $objeto['objetos']['escala_valor_final']; ?>" data-slider-step="<?php echo $objeto['objetos']['escala_incremento']; ?>" data-slider-value="<?php echo $objeto['objetos']['escala_valor_inicial']; ?>"/>
+                            <span id="spanex<?php echo $contador; ?>Slider" class="label label-primary"><?php echo $objeto['objetos']['escala_valor_inicial']; ?></span> 
+                        </div>
+                        <?php
+                        $contador++;
+                    } else if ($objeto['objetos']['tipo_resposta'] == 'DESCRITIVA') {
+                        ?>
+                        <textarea class="form-control" rows="4" name="data[respostas][<?php echo $contador; ?>]"></textarea>
+                    <?php } else if ($objeto['objetos']['tipo_resposta'] == 'ALTERNATIVA') { ?>
+                        <div>
+
+                            <span><strong><?php echo $objeto['objetos']['descricao']; ?></strong></span>
+                            <?php foreach ($objeto['respostas'] as $resposta) { ?>
+                                <div class="radio">
+                                    <label><input type="radio" name="data[respostas][<?php echo $contador; ?>]" value="<?php echo $resposta['respostasobjeto']['ganha_perde']; ?>-<?php echo $resposta['respostasobjeto']['qtd_pontos']; ?>" class="acao-respostas"/><?php echo $resposta['respostasobjeto']['descricao']; ?></label>
+                                </div>
+                                <?php
+                                $contador++;
+                            }
+                            ?>
+                        </div>
+                    <?php }
+                    ?></div>
+            <?php }
+            ?>
+            <button type="submit" class="btn btn-success btn-submit">Enviar Resposta</button>
+        </form>
+    <?php } ?>
+</div>
+
+
+
+

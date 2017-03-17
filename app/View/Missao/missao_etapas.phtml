@@ -1,0 +1,81 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<!-- Latest compiled and minified JavaScript 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<?php
+echo $this->Html->css('game-menu', null, array('media' => 'screen')) . "\n";
+echo $this->Html->css('home', null, array('media' => 'screen')) . "\n";
+echo $this->Html->css('game-page-title', null, array('media' => 'screen')) . "\n";
+echo $this->Html->css('atividades', null, array('media' => 'screen')) . "\n";
+echo $this->Html->css('Missao/missao', null, array('media' => 'screen')) . "\n";
+
+echo $this->fetch('css');
+
+echo $this->Html->script('backButtonjs') . "\n";
+echo $this->fetch('script');
+?>
+
+<?php echo $this->Element('header_menu'); ?>
+
+<div class="jumbotron game-page-title missao-title">
+   <h4 class="pull-left" id="page-back-btn"><span class="glyphicon glyphicon-menu-left"> </span></h4>  <h4>Missão: <small><?php echo $etapas[0]['missoes']['missao']; ?></small></h4>      
+</div> 
+<br />
+<div class="container">
+
+    <?php
+    $contador = 1;
+    foreach ($etapas as $etapa) {
+    
+        ?>
+        <div class="row missao-etapa <?php
+        if (!empty($etapa['misseosetapashistoricos']) && $etapa['misseosetapashistoricos']['status'] == 'CONCLUIDO') {
+            echo "missao-etapa-completa";
+        }
+        ?>">
+            <p class=""><span class="glyphicon glyphicon-star-empty glyphstar"></span> <small><strong> Etapa <?php echo $contador; ?></strong></small></p>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-9">
+
+                        <?php if (!empty($etapa['misseosetapashistoricos']) && $etapa['misseosetapashistoricos']['status'] == 'CONCLUIDO') { ?>
+                    <div><span class="glyphicon glyphicon-time"></span> <small><?php
+                    $date = date_create($etapa['misseosetapashistoricos']['dataregistro']);
+                    echo date_format($date, "d/m/Y") . ' - 00:00';
+                    ?></small></div>
+                    <div><span class="glyphicon glyphicon-star"></span> <small>Ganhou 10 Pontos!</small></div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                    <?php echo $etapa['misseosetapashistoricos']['status']; ?>
+                        </div>
+                    </div>
+                            <?php } else { ?>
+                    <a href="../executarEtapa/<?php echo $etapa['missaoetapas']['id'].'/'.$contador; ?>">
+                        <div><span class="glyphicon glyphicon-info-sign"></span> <small>Válido até <?php
+                        $date = date_create($etapa['misseosetapashistoricos']['dataregistro']);
+                        echo date_format($date, "d/m/Y") . ' - 00:00';
+                        ?></small></div>
+                        <div><span class="glyphicon glyphicon-star"></span> <small>Vale 10 Pontos!</small></div>
+                    </a>
+        <?php } ?>
+
+            </div>
+        </div>
+    <?php
+    $contador++;
+}
+?>
+
+
+
+</div>
+

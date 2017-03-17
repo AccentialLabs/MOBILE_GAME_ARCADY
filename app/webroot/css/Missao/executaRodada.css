@@ -1,0 +1,41 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 06/01/2017, 18:02:48
+    Author     : user
+*/
+.acoes-incompletas{
+        padding-top: 10px;
+    }
+
+    .acoes-incompletas .breadcrumb{
+        padding: 5px 15px;
+    }
+
+    .acoes-incompletas .breadcrumb li{
+        width: 100%;
+    }
+
+    .acoes-incompletas .breadcrumb li span.label-default{
+        background: #333;
+    }
+
+    .acoes-completas{
+        padding-top: 10px;
+    }
+
+    .painel-acao{
+        padding: 3px;
+    }
+
+    .estrela-acao{
+        color: orange;
+    }
+    .objetos-responder-acao{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-family: sans-serif;
+    }

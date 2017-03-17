@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 13/12/2016, 17:18:27
+    Author     : user
+*/
+
+.missoes-disponiveis{
+    padding-top: 10px;
+}
+
+.acoes-incompletas .breadcrumb{
+    padding: 5px 15px;
+}
+
+.acoes-incompletas .breadcrumb li{
+    width: 100%;
+}
+
+.acoes-incompletas .breadcrumb li span.label-default{
+    background: #333;
+}
+
+.missoes-finalizadas{
+    padding-top: 10px;
+    display: none;
+}
+
+.painel-missao{
+    padding: 7px;
+}
+
+.estrela-acao{
+    color: orange;
+}
+
+
+.painel-acao-realizada{
+    background: #eeeeee;
+}
+
+div.disabled{
+    opacity: 
+        0.2;
+}
+
+.missao-etapa{
+    border-bottom: 1px solid #dcdcdc;
+    padding-left: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.missao-etapa-completa{
+    
+    background: #eeeeee;
+    
+}
+
+.glyphstar{
+    font-size: 20px;
+    color: #666;
+}
+
+.missao-title{
+    padding-left: 10px;
+}
+

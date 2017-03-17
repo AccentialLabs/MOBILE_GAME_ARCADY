@@ -1,0 +1,20 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07/12/2016, 12:48:36
+    Author     : Matheus Odilon
+*/
+   .game-menu{
+        margin-bottom: 0px;
+        padding: .1rem 0rem;
+        
+    }
+    
+    .game-menu-brand{
+        
+        padding-top: .65rem;
+    }
+
